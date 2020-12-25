@@ -34,7 +34,8 @@ public class BungeeHostNameWhiteList extends Plugin implements Listener {
     private String warning;
     private boolean ignoreCase;
     private boolean blockLegacy;
-
+    private boolean debug;
+    
     @Override
     public void onEnable() {
         reloadConfig();
@@ -57,6 +58,7 @@ public class BungeeHostNameWhiteList extends Plugin implements Listener {
             Configuration config = configProvider.load(file);
             warning = ChatColor.translateAlternateColorCodes('&', config.getString("warning"));
             ignoreCase = config.getBoolean("ignore-case", true);
+            debug = config.getBoolean("debug", false);
             validHostNames = Util.getHostNames(config.getStringList("allowed-host-names"), ignoreCase);
             blockLegacy = config.getBoolean("block-legacy", true);
         } catch (IOException e) {
@@ -87,6 +89,10 @@ public class BungeeHostNameWhiteList extends Plugin implements Listener {
             return blockLegacy;
         } else {
             String hostname = ignoreCase ? address.getHostName().toLowerCase() : address.getHostName();
+            
+            if (debug)
+                System.out.println("Connection from domain:" + hostname);
+            
             return !validHostNames.contains(hostname);
         }
     }
