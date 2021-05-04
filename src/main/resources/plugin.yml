@@ -1,5 +1,5 @@
 name: HostNameWhiteList
-version: 1.4
+version: 1.5
 author: EDawg878
 main: com.edawg878.hostnamewhitelist.bukkit.BukkitHostNameWhiteList
 commands:

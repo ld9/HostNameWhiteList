@@ -55,13 +55,6 @@ public class BukkitHostNameWhiteList extends JavaPlugin implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onPing(ServerListPingEvent event) {
-        if (isBlocked(event.getAddress().getHostName())) {
-            event.setMotd(warning);
-        }
-    }
-
     private boolean isBlocked(String host) {
         if (host == null) {
             return blockLegacy;
